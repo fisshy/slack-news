@@ -9,7 +9,7 @@ $ export SLACK_URL=INCOMING SLACK URL
 Slack commands to post to /news
 
 Commands
-- [x] /news js ( still have to parse somre more data )
+- [x] /news js ( still have to parse some more data )
 - [ ] /news db
 - [ ] /news .net
 - [ ] /news ruby
