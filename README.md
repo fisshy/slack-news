@@ -1,9 +1,9 @@
 Slack tech news
 
-´´´js
+```js
 $ npm install
 $ export SLACK_URL=INCOMING SLACK URL
-´´´
+```
 
 ### USAGE
 Slack commands to post to /news
