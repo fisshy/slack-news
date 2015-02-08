@@ -28,12 +28,12 @@ var slackTransform = function(sd, items, cb) {
 
       slackFields.push(field);
     }
-    
+
   });
 
 
   var slack_message = {
-    channel: sd.channel_name, 
+    channel: '#' + sd.channel_name, 
     username: sd.user_name,
     icon_emoji: ":ghost:",
     attachments:[
