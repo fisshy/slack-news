@@ -13,3 +13,7 @@ Commands
 - [ ] /news db
 - [ ] /news .net
 - [ ] /news ruby
+
+
+### Source
+- js = javascriptweekly.com
