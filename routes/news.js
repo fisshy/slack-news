@@ -19,7 +19,9 @@ router.post('/', function(req, res, next) {
 
 	var all = commands.length == 2 ? commands[1] : null;
 
-	var module = news[commands[0]];
+	var selectedNews = commands[0];
+
+	var module = news[selectedNews];
 
 	if(!module) { return res.json({text : 'command not found'}).end(); }
 
@@ -27,7 +29,7 @@ router.post('/', function(req, res, next) {
 
 	module.slack(
 		function(err, data) {
-			
+
 			if(err) return res.json(err).end();
 
 			if(all) {
@@ -37,7 +39,7 @@ router.post('/', function(req, res, next) {
 	    		res.status(200).send(slack.toMarkdown(data, sd));
 		    }
 
-	}, type);
+	}, selectedNews);
 });
 
 module.exports = router;
