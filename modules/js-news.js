@@ -4,14 +4,14 @@ var request = require('request');
 var _ = require('underscore');
 var cheerio = require('cheerio');
 
-var slackTransform = function(sd, items, cb) {
+var slackTransform = function(items, cb) {
   
   var item = items[0]; // Maybe there can be more then one?
   var $ = cheerio.load(item.description);
 
   var gowides = $('.gowide tr td');
 
-  var slackFields = [];
+  items = [];
 
   gowides.each(function(i, item) {
     var field = {};
@@ -24,34 +24,20 @@ var slackTransform = function(sd, items, cb) {
       var second = $(divs[1]);
       field.value = second.text();
       var a = first.children('a');
-      field.value += ' <' + a.attr('href') + '|Click here> for more!';
-
-      slackFields.push(field);
+      field.url = a.attr('href');
+      items.push(field);
     }
 
   });
 
 
-  var slack_message = {
-    channel: '#' + sd.channel_name, 
-    username: sd.user_name,
-    icon_emoji: ":ghost:",
-    attachments:[
-      {
-        fallback: "Unknown",
-        pretext: item.title,
-        color: "#36a64f", // Can either be one of 'good', 'warning', 'danger', or any hex color code
-        // Fields are displayed in a table on the message
-        fields: slackFields
-      }
-    ]
-  };
+  
 
-  cb(null, slack_message);
+  cb(null, { title: item.title, items: items});
 };
 
 module.exports = {
-  slack : function(sd, cb) {
+  slack : function(cb) {
 
     var req = request('http://javascriptweekly.com/rss/17ki4d14')
     var feedparser = new FeedParser();
@@ -85,7 +71,7 @@ module.exports = {
         items.push(item);
       }
 
-      slackTransform(sd, items, cb);
+      slackTransform(items, cb);
 
     });
   }

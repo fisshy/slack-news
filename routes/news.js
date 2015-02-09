@@ -8,28 +8,31 @@ var news = {
 
 var SLACK_URL = process.env.SLACK_URL;
 
-/* GET home page. */
 router.post('/', function(req, res, next) {
 	
-	var type = req.body.text;
-	if(!type) { return next(new Error("Not found")); }
+	var command = req.body.text;
+	if(!command) { return res.json({text : 'command not found'}).end(); }
 	
-	var module = news[type];
-	if(!module) { return next(new Error("Not found")); }
+	var commands = (command || "").trim().split(' ');
+
+	var all = commands.length == 2 ? commands[1] : null;
+
+	var module = news[commands[0]];
+
+	if(!module) { return res.json({text : 'command not found'}).end(); }
 
 	var sd = req.body;
 
-	module.slack(sd, function(err, data) {
-		if(err) return next(err);
-		request.post(SLACK_URL, {
-	      form: {
-	        payload: JSON.stringify(data)
-	      }
-	    });
-	    res.status(200).end()
+	module.slack(function(err, data) {
+		if(err) return res.json({ text : 'an error occured'}).end();
+		if(all) {
+			request.post(SLACK_URL, toSlack(data, sd));
+	    	res.status(200).end()
+
+	    } else {
+    		res.json(toSlack(data, sd)).end();
+	    }
 	});
 });
-
-
 
 module.exports = router;

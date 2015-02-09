@@ -16,6 +16,9 @@ Commands
 - [ ] /news node
 - [ ] and many more
 
+Optional arguments
+/news js all ( will do an incoming webhook to slack )
+
 ### Source
 - js = javascriptweekly.com
 
