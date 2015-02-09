@@ -32,27 +32,18 @@ module.exports = {
 	    };
 	},
 	toMarkdown: function(data, sd) {
-
-		var slackFields = [];
+		var text = data.title + '\n';
 		_.each(data.items, function(item) {
-			slackFields.push({
-				title : item.title,
-				value : item.value + ' <' + item.url + '|Click here> for more!'
-			});
+			text += item.title 
+				+ '\n' + item.value + 
+				'\n <' + item.url + '|Click here> for more! \n';
 		});
 
 		var slack_message = {
 		    channel: '#' + sd.channel_name, 
 		    username: sd.user_name,
 		    icon_emoji: ":ghost:",
-		    attachments:[
-		      {
-		        fallback: "Unknown",
-		        pretext: data.title,
-		        color: "#36a64f",
-		        fields: slackFields
-		      }
-		    ]
+		    text : text
 	  	};
 
 		return slack_message;
