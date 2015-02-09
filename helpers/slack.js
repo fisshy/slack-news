@@ -39,13 +39,13 @@ module.exports = {
 				'\n <' + item.url + '|Click here> for more! \n';
 		});
 
-		var slack_message = {
+		/*var slack_message = {
 		    channel: '#' + sd.channel_name, 
 		    username: sd.user_name,
 		    icon_emoji: ":ghost:",
 		    text : text
-	  	};
+	  	};*/
 
-		return slack_message;
+		return text;
 	}
 };
