@@ -30,7 +30,7 @@ router.post('/', function(req, res, next) {
 			request.post(SLACK_URL, slack.toSlack(data, sd));
 	    	res.status(200).end()
 	    } else {
-    		res.status(200).json(slack.toMarkdown(data, sd));
+    		res.status(200).send(slack.toMarkdown(data, sd));
 	    }
 	});
 });
