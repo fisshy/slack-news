@@ -2,7 +2,7 @@ Slack tech news
 
 ```js
 $ npm install
-$ export SLACK_URL=INCOMING SLACK URL
+$ export SLACK_URL=INCOMING SLACK URL (used when "all" is included in command )
 ```
 
 ### USAGE
@@ -24,5 +24,8 @@ Optional arguments
 - js = javascriptweekly.com
 - db = dbweekly.com
 
-
+JS Weekly
 ![Image](http://s22.postimg.org/v3t3jpvyp/Screen_Shot_2015_02_08_at_22_08_33.png)
+
+DB Weekly
+![Image](http://s4.postimg.org/ddakcct3x/Screen_Shot_2015_02_09_at_22_25_33.png)
