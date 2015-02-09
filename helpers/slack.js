@@ -7,7 +7,7 @@ module.exports = {
 		_.each(data.items, function(item) {
 			slackFields.push({
 				title : item.title,
-				value : item.value + ' <' + item.url + '|Click here> for more!';
+				value : item.value + ' <' + item.url + '|Click here> for more!'
 			});
 		});
 
@@ -18,7 +18,7 @@ module.exports = {
 		    attachments:[
 		      {
 		        fallback: "Unknown",
-		        pretext: item.title,
+		        pretext: data.title,
 		        color: "#36a64f",
 		        fields: slackFields
 		      }
@@ -37,7 +37,7 @@ module.exports = {
 		_.each(data.items, function(item) {
 			slackFields.push({
 				title : item.title,
-				value : item.value + ' <' + item.url + '|Click here> for more!';
+				value : item.value + ' <' + item.url + '|Click here> for more!'
 			});
 		});
 

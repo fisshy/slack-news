@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var slack = require('../helpers/slack');
 
 var news = {
 	js : require('../modules/js-news')
@@ -24,13 +25,14 @@ router.post('/', function(req, res, next) {
 	var sd = req.body;
 
 	module.slack(function(err, data) {
+		console.log(err);
 		if(err) return res.json(err).end();
 		if(all) {
-			request.post(SLACK_URL, toSlack(data, sd));
+			request.post(SLACK_URL, slack.toSlack(data, sd));
 	    	res.status(200).end()
 
 	    } else {
-    		res.json(toSlack(data, sd)).end();
+    		res.json(slack.toSlack(data, sd)).end();
 	    }
 	});
 });
