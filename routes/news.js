@@ -24,7 +24,7 @@ router.post('/', function(req, res, next) {
 	var sd = req.body;
 
 	module.slack(function(err, data) {
-		if(err) return res.json({ text : 'an error occured'}).end();
+		if(err) return res.json(err).end();
 		if(all) {
 			request.post(SLACK_URL, toSlack(data, sd));
 	    	res.status(200).end()
