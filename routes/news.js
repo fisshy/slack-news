@@ -25,14 +25,12 @@ router.post('/', function(req, res, next) {
 	var sd = req.body;
 
 	module.slack(function(err, data) {
-		console.log(err);
 		if(err) return res.json(err).end();
 		if(all) {
 			request.post(SLACK_URL, slack.toSlack(data, sd));
 	    	res.status(200).end()
-
 	    } else {
-    		res.json(slack.toMarkdown(data, sd)).end();
+    		res.status(200).json(slack.toMarkdown(data, sd));
 	    }
 	});
 });

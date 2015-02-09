@@ -46,6 +46,6 @@ module.exports = {
 		    text : text
 	  	};*/
 
-		return JSON.stringify({text : text});
+		return {text : text};
 	}
 };
