@@ -30,10 +30,23 @@ var slackTransform = function(items, cb) {
 
       var first = $(divs[0]);
       field.title = trim(first.text());  
+      
       var second = $(divs[1]);
-      field.value = trim(second.text());
+      var temp1 = trim(second.text());
+
       var a = first.children('a');
       field.url = trim(a.attr('href'));
+      
+      var third = $(divs[2]);
+      var temp2 = trim(third.text());
+
+      if(temp1.length > temp2.length) {
+        field.value = temp1;
+        field.author = temp2;
+      } else {
+        field.value = temp2;
+        field.author = temp1;
+      }
 
       items.push(field);
     }
