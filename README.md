@@ -24,8 +24,8 @@ Optional arguments
 - js = javascriptweekly.com
 - db = dbweekly.com
 
-JS Weekly
+JS Weekly (/news js all)
 ![Image](http://s22.postimg.org/v3t3jpvyp/Screen_Shot_2015_02_08_at_22_08_33.png)
 
-DB Weekly
+DB Weekly (/news db)
 ![Image](http://s4.postimg.org/ddakcct3x/Screen_Shot_2015_02_09_at_22_25_33.png)
