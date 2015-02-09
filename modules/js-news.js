@@ -4,6 +4,10 @@ var request = require('request');
 var _ = require('underscore');
 var cheerio = require('cheerio');
 
+var trim = function(text) {
+  return (text || "").replace('\n', '').replace('\t', '');
+}
+
 var slackTransform = function(items, cb) {
   
   var item = items[0]; // Maybe there can be more then one?
@@ -20,11 +24,11 @@ var slackTransform = function(items, cb) {
     if(divs.length === 3) {
 
       var first = $(divs[0]);
-      field.title = (first.text() || "").trim('\n');  
+      field.title = trim(first.text());  
       var second = $(divs[1]);
-      field.value = (second.text() || "").trim('\n');
+      field.value = trim(second.text());
       var a = first.children('a');
-      field.url = (a.attr('href') || "").trim('\n');;
+      field.url = trim(a.attr('href'));
 
       items.push(field);
     }

@@ -32,11 +32,12 @@ module.exports = {
 	    };
 	},
 	toMarkdown: function(data, sd) {
-		var text = data.title + '\n';
+		var text = [];
+		text.push(data.title)
 		_.each(data.items, function(item) {
-			text += '*' + item.title + '*' 
-				+ '\n>>>' + item.value + 
-				'\n <' + item.url + '|Click here> for more! \n\n';
+			text.push('*' + item.title + '*');
+			text.push('>>>' + item.value);
+			text.push('&lt;' + item.url + '|Click here for more!>');
 		});
 
 		/*var slack_message = {
@@ -46,6 +47,6 @@ module.exports = {
 		    text : text
 	  	};*/
 
-		return text;
+		return text.join('\n').trim();
 	}
 };
