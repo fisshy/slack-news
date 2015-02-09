@@ -47,6 +47,6 @@ module.exports = {
 		    text : text
 	  	};*/
 
-		return text.join('\n').trim();
+		return text.join('').trim();
 	}
 };

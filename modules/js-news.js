@@ -5,7 +5,7 @@ var _ = require('underscore');
 var cheerio = require('cheerio');
 
 var trim = function(text) {
-  return (text || "").replace('\n', '').replace('\t', '');
+  return (text || "").replace(/\n/g, '').replace(/\t/g, '');
 }
 
 var slackTransform = function(items, cb) {
