@@ -4,7 +4,8 @@ var request = require('request');
 var slack = require('../helpers/slack');
 
 var news = {
-	js : require('../modules/js-news')
+	js : require('../modules/weekly-news'),
+	db : require('../modules/weekly-news')
 };
 
 var SLACK_URL = process.env.SLACK_URL;
@@ -24,15 +25,19 @@ router.post('/', function(req, res, next) {
 
 	var sd = req.body;
 
-	module.slack(function(err, data) {
-		if(err) return res.json(err).end();
-		if(all) {
-			request.post(SLACK_URL, slack.toSlack(data, sd));
-	    	res.status(200).end()
-	    } else {
-    		res.status(200).send(slack.toMarkdown(data, sd));
-	    }
-	});
+	module.slack(
+		function(err, data) {
+			
+			if(err) return res.json(err).end();
+
+			if(all) {
+				request.post(SLACK_URL, slack.toSlack(data, sd));
+		    	res.status(200).end()
+		    } else {
+	    		res.status(200).send(slack.toMarkdown(data, sd));
+		    }
+
+	}, type);
 });
 
 module.exports = router;

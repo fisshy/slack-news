@@ -4,6 +4,11 @@ var request = require('request');
 var _ = require('underscore');
 var cheerio = require('cheerio');
 
+var weekly = {
+  js: 'http://javascriptweekly.com/rss/17ki4d14',
+  db: 'http://dbweekly.com/rss/1oe5532d'
+};
+
 var trim = function(text) {
   return (text || "").replace(/\n/g, '').replace(/\t/g, '');
 }
@@ -39,9 +44,9 @@ var slackTransform = function(items, cb) {
 };
 
 module.exports = {
-  slack : function(cb) {
+  slack : function(cb, type) {
 
-    var req = request('http://javascriptweekly.com/rss/17ki4d14')
+    var req = request(weekly[type]);
     var feedparser = new FeedParser();
 
     req.on('error', cb);
