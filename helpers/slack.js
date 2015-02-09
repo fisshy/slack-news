@@ -37,7 +37,7 @@ module.exports = {
 		_.each(data.items, function(item) {
 			text.push('*' + item.title + '*');
 			text.push('>' + item.value +
-					  '\n<' + item.url + '|Click here for more!>');
+					  '<' + item.url + '|Click here for more!>');
 		});
 
 		/*var slack_message = {
