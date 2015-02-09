@@ -46,6 +46,6 @@ module.exports = {
 		    text : text
 	  	};*/
 
-		return texta;
+		return text;
 	}
 };
