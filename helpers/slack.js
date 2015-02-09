@@ -34,7 +34,7 @@ module.exports = {
 	toMarkdown: function(data, sd) {
 		var text = data.title + '\n';
 		_.each(data.items, function(item) {
-			text += '<#000000|' + item.title + '>' 
+			text += '*' + item.title + '*' 
 				+ '\n>>>' + item.value + 
 				'\n <' + item.url + '|Click here> for more! \n\n';
 		});
