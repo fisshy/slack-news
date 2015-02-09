@@ -16,6 +16,7 @@ Commands
 - [ ] /news node
 - [ ] /news hacker ( hacker news )
 - [ ] and many more
+- [ ] include author
 
 Optional arguments
 /news js all ( will do an incoming webhook to slack )
