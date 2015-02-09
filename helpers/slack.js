@@ -48,7 +48,7 @@ module.exports = {
 		    attachments:[
 		      {
 		        fallback: "Unknown",
-		        pretext: item.title,
+		        pretext: data.title,
 		        color: "#36a64f",
 		        fields: slackFields
 		      }
