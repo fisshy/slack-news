@@ -20,18 +20,16 @@ var slackTransform = function(items, cb) {
     if(divs.length === 3) {
 
       var first = $(divs[0]);
-      field.title = first.text();  
+      field.title = (first.text() || "").trim('\n');  
       var second = $(divs[1]);
-      field.value = second.text();
+      field.value = (second.text() || "").trim('\n');
       var a = first.children('a');
-      field.url = a.attr('href');
+      field.url = (a.attr('href') || "").trim('\n');;
+
       items.push(field);
     }
 
   });
-
-
-  
 
   cb(null, { title: item.title, items: items});
 };

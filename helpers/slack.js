@@ -34,9 +34,9 @@ module.exports = {
 	toMarkdown: function(data, sd) {
 		var text = data.title + '\n';
 		_.each(data.items, function(item) {
-			text += item.title 
-				+ '\n' + item.value + 
-				'\n <' + item.url + '|Click here> for more! \n';
+			text += '<#000000|' + item.title + '>' 
+				+ '\n>>>' + item.value + 
+				'\n <' + item.url + '|Click here> for more! \n\n';
 		});
 
 		/*var slack_message = {
@@ -46,6 +46,6 @@ module.exports = {
 		    text : text
 	  	};*/
 
-		return text;
+		return texta;
 	}
 };
