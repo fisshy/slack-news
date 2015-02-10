@@ -22,7 +22,63 @@ var trim = function(text) {
           .replace(/\t/g, '');
 }
 
-var slackTransform = function(items, cb) {
+var parseHtml = {
+  /*
+   * I've decided to split them up because theres 
+   * almost different order in every RSS table
+   */
+  js : function($, item) {
+    var field;
+    var divs = $(item).children('div');
+
+    if(divs.length === 3) {
+
+      field = {};
+
+      var first = $(divs[0]);
+      field.title = trim(first.text());  
+      
+      var second = $(divs[1]);
+      field.value = trim(second.text());
+
+      var a = first.children('a');
+      field.url = trim(a.attr('href'));
+      
+      var third = $(divs[2]);
+      field.author = trim(third.text());
+
+    }
+
+    return field;
+  },
+
+  db : function($, item) {
+    var field;
+    var divs = $(item).children('div');
+
+    if(divs.length === 3) {
+      
+      field = {};
+
+      var first = $(divs[0]);
+      field.title = trim(first.text());  
+      
+      var second = $(divs[1]);
+      field.author = trim(second.text());
+
+      var a = first.children('a');
+      field.url = trim(a.attr('href'));
+      
+      var third = $(divs[2]);
+      field.value = trim(third.text());
+
+    }
+
+    return field;
+  }
+}
+
+var slackTransform = function(items, type, cb) {
   
   var item = items[0]; // Maybe there can be more then one?
   var $ = cheerio.load(item.description);
@@ -32,37 +88,14 @@ var slackTransform = function(items, cb) {
   items = [];
 
   gowides.each(function(i, item) {
-    var field = {};
-    var divs = $(item).children('div');
-
-    if(divs.length === 3) {
-
-      var first = $(divs[0]);
-      field.title = trim(first.text());  
-      
-      var second = $(divs[1]);
-      var temp1 = trim(second.text());
-
-      var a = first.children('a');
-      field.url = trim(a.attr('href'));
-      
-      var third = $(divs[2]);
-      var temp2 = trim(third.text());
-
-      if(temp1.length > temp2.length) {
-        field.value = temp1;
-        field.author = temp2;
-      } else {
-        field.value = temp2;
-        field.author = temp1;
-      }
-
+    var field = parseHtml[type]($, item)
+    if(field) {
       items.push(field);
     }
-
   });
 
   cb(null, { title: item.title, items: items});
+
 };
 
 module.exports = {
@@ -100,7 +133,7 @@ module.exports = {
         items.push(item);
       }
 
-      slackTransform(items, cb);
+      slackTransform(items, type, cb);
 
     });
   }
