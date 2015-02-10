@@ -12,12 +12,11 @@ Commands
 - [x] /news js ( still have to parse some more data )
 - [x] /news db ( still have to parse some more data )
 - [x] /news html5
-- [x] /news mobile
-- [x] /news postgres
-- [x] /news ruby
-- [x] /news go	
+- [ ] /news mobile
+- [ ] /news postgres
+- [ ] /news ruby
+- [ ] /news go	
 - [ ] /news .net
-- [x] /news ruby
 - [x] /news node
 
 - [] /news hacker ( hacker news )

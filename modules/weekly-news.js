@@ -23,10 +23,12 @@ var trim = function(text) {
 }
 
 var parseHtml = {
+
   /*
    * I've decided to split them up because theres 
    * almost different order in every RSS table
    */
+
   js : function($, item) {
     var field;
     var divs = $(item).children('div');
@@ -71,6 +73,53 @@ var parseHtml = {
       
       var third = $(divs[2]);
       field.value = trim(third.text());
+
+    }
+
+    return field;
+  },
+
+  html5 : function($, item) {
+    var field;
+    var divs = $(item).children('div');
+
+    if(divs.length === 3) {
+      
+      field = {};
+
+      var first = $(divs[0]);
+      field.title = trim(first.text());  
+      
+      var second = $(divs[1]);
+      field.author = trim(second.text());
+
+      var a = first.children('a');
+      field.url = trim(a.attr('href'));
+      
+      var third = $(divs[2]);
+      field.value = trim(third.text());
+
+    }
+
+    return field;
+  },
+
+  node : function($, item) {
+    var field;
+    var divs = $(item).children('div');
+
+    if(divs.length === 2) {
+      
+      field = {};
+
+      var first = $(divs[0]);
+      field.title = trim(first.text());  
+      
+      var second = $(divs[1]);
+      field.value = trim(second.text());
+
+      var a = first.children('a');
+      field.url = trim(a.attr('href'));
 
     }
 
