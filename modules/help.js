@@ -12,7 +12,7 @@ var weekly = {
 };
 
 module.exports = {
-    console.log("hm");
+  slack : function(cb, type) {
 
     var items = [];
     _.each(weekly, function(item, key) {
@@ -20,7 +20,7 @@ module.exports = {
         title: item
       });
     });
-    
+
     cb(null, { title: "Slack commands\n", items: items})
   }
 }
