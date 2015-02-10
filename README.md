@@ -11,10 +11,16 @@ Slack commands to post to /news
 Commands
 - [x] /news js ( still have to parse some more data )
 - [x] /news db ( still have to parse some more data )
+- [x] /news html5
+- [x] /news mobile
+- [x] /news postgres
+- [x] /news ruby
+- [x] /news go	
 - [ ] /news .net
-- [ ] /news ruby
-- [ ] /news node
-- [ ] /news hacker ( hacker news )
+- [x] /news ruby
+- [x] /news node
+
+- [] /news hacker ( hacker news )
 - [ ] and many more
 - [ ] include author
 

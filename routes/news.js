@@ -4,8 +4,21 @@ var request = require('request');
 var slack = require('../helpers/slack');
 
 var news = {
-	js : require('../modules/weekly-news'),
-	db : require('../modules/weekly-news')
+	getModule: function(module) {
+		switch(module) {
+			case "js":
+			case "db":
+			case "postgres":
+			case "mobile":
+			case "html5":
+			case "go":
+			case "ruby":
+			case "node":
+				return require('../modules/weekly-news')
+			default:
+				return null;
+		}
+	}
 };
 
 var SLACK_URL = process.env.SLACK_URL;
@@ -13,7 +26,7 @@ var SLACK_URL = process.env.SLACK_URL;
 router.post('/', function(req, res, next) {
 	
 	var command = req.body.text;
-	if(!command) { return res.json({text : 'command not found'}).end(); }
+	if(!command) { return res.send('command not found').end(); }
 	
 	var commands = (command || "").trim().split(' ');
 
@@ -21,9 +34,9 @@ router.post('/', function(req, res, next) {
 
 	var selectedNews = commands[0];
 
-	var module = news[selectedNews];
+	var module = news.getModule(selectedNews);
 
-	if(!module) { return res.json({text : 'command not found'}).end(); }
+	if(!module) { return res.send('command not found').end(); }
 
 	var sd = req.body;
 
@@ -39,7 +52,9 @@ router.post('/', function(req, res, next) {
 	    		res.status(200).send(slack.toMarkdown(data, sd));
 		    }
 
-	}, selectedNews);
+		}, 
+		selectedNews
+	);
 });
 
 module.exports = router;

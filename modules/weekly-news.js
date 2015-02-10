@@ -6,11 +6,20 @@ var cheerio = require('cheerio');
 
 var weekly = {
   js: 'http://javascriptweekly.com/rss/17ki4d14',
-  db: 'http://dbweekly.com/rss/1oe5532d'
+  db: 'http://dbweekly.com/rss/1oe5532d',
+  postgres: 'http://postgresweekly.com/rss/1d39epki',
+  mobile: 'http://mobilewebweekly.co/rss/1ja4g3b1',
+  html5: 'http://html5weekly.com/rss/220ng9m3',
+  go: 'http://golangweekly.com/rss/12f3deib',
+  ruby: 'http://rubyweekly.com/rss/22hjgj6j',
+  node: 'http://nodeweekly.com/rss/1cj9ne2a'
+
 };
 
 var trim = function(text) {
-  return (text || "").replace(/\n/g, '').replace(/\t/g, '');
+  return  (text || "")
+          .replace(/\n/g, '')
+          .replace(/\t/g, '');
 }
 
 var slackTransform = function(items, cb) {
