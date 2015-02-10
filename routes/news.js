@@ -15,6 +15,8 @@ var news = {
 			case "ruby":
 			case "node":
 				return require('../modules/weekly-news')
+			case "help":
+				return require('../modules/help');
 			default:
 				return null;
 		}

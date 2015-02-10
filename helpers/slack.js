@@ -7,7 +7,9 @@ module.exports = {
 		_.each(data.items, function(item) {
 			slackFields.push({
 				title : item.title,
-				value : item.value + ' <' + item.url + '|Click here> for more!'
+				value : item.value + 
+						item.url ? ' <' + item.url + '|Click here> for more!':
+						""
 			});
 		});
 
@@ -36,17 +38,11 @@ module.exports = {
 		text.push(data.title)
 		_.each(data.items, function(item) {
 			text.push('*' + item.title + '*');
-			text.push('>' + item.value +
-					  '<' + item.url + '|Click here for more!>\n');
+			text.push(
+				(item.value ? ('>' + item.value) : "") +
+			  	(item.url ? ('<' + item.url + '|Click here for more!>\n') : "") 
+		  	);
 		});
-
-		/*var slack_message = {
-		    channel: '#' + sd.channel_name, 
-		    username: sd.user_name,
-		    icon_emoji: ":ghost:",
-		    text : text
-	  	};*/
-
 		return text.join('\n').trim();
 	}
 };
